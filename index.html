@@ -74,7 +74,12 @@ section{padding:82px 0;border-bottom:1px solid var(--line)}
 .stat .big{font-weight:900;font-size:clamp(26px,3.4vw,36px);letter-spacing:-1px;color:var(--gold-bright);line-height:1.05}
 .stat .lab{color:var(--mute);font-size:13.5px;margin-top:8px;line-height:1.5}
 .disc{margin-top:20px;font-size:12.5px;color:var(--deep)}
-@media(max-width:820px){.stats{grid-template-columns:1fr 1fr}}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.dash{background:#fff;border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+.dash img{width:100%;display:block}
+.dash .cap{background:var(--panel);color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.2px;padding:13px 16px;border-top:1px solid var(--line);line-height:1.5}
+.dash .cap b{color:var(--gold)}
+@media(max-width:820px){.stats{grid-template-columns:1fr 1fr}.dash-grid{grid-template-columns:1fr}}
 
 /* WORK */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
@@ -196,7 +201,13 @@ footer{padding:50px 0 60px;background:#000}
       <div class="stat"><div class="big">$742k</div><div class="lab">Driven for a cosmetic surgery practice (under NDA)</div></div>
       <div class="stat"><div class="big">10x</div><div class="lab">Return on ad spend at the start ($3k &rarr; $30k)</div></div>
     </div>
-    <p class="disc">Results are typical of specific engagements, not guarantees. Every business, offer, and market is different.</p>
+    <div class="dash-grid">
+      <div class="dash"><img src="proof/revenue-dashboard.png" alt="Revenue dashboard - $742,715 attributed, +72%"><div class="cap">Cosmetic surgery practice (NDA) &middot; <b>$742,715</b> attributed &middot; +72%</div></div>
+      <div class="dash"><img src="proof/stripe-dashboard.png" alt="Stripe - $331K gross volume, +101%"><div class="cap">Coaching client &middot; <b>$331K</b> in 6 months &middot; +101%</div></div>
+      <div class="dash"><img src="proof/ecom-dashboard.png" alt="Ecommerce - $11.59M brand month"><div class="cap">Ecommerce brand &middot; <b>$11.59M</b> month &middot; alongside a partner agency</div></div>
+      <div class="dash"><img src="proof/ecom-growth.png" alt="Email and SMS revenue $70k to $932k per month"><div class="cap">Email + SMS revenue &middot; <b>$70k &rarr; $932k/mo</b> &middot; with a partner agency</div></div>
+    </div>
+    <p class="disc">Results are typical of specific engagements, not guarantees. Some were achieved alongside partner agencies. Every business, offer, and market is different.</p>
   </div>
 </section>
 
@@ -279,7 +290,7 @@ footer{padding:50px 0 60px;background:#000}
     </div>
     <div class="backed">
       <div class="op"><div class="who">Andrei Givero<span>Founder</span></div><p>Runs strategy, media buying, and fulfilment. Built funnels and launch systems in the info world - six-figure launches, $2M+ generated - now pointed entirely at local businesses.</p></div>
-      <div class="op"><div class="who">Kabrin Johal<span>Advisor</span></div><p>Scaled a $3M+ marketing agency and exited a chain of gyms for high seven figures before 25. Advises AG1 one-on-one.</p></div>
+      <div class="op"><div class="who">Kabrin Johal<span>Partner</span></div><p>Scaled a $3M+ marketing agency and exited a chain of gyms for high seven figures before 25. Part of the AG1 team.</p></div>
     </div>
   </div>
 </section>
