@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="What working with AG1 Consulting is actually like, in our clients' words, including the parts that went slowly.">
+<meta name="robots" content="noindex">
+<title>What working with us is actually like - AG1 Consulting</title>
+<style>
+  :root {
+    --paper: #FAF9F5;
+    --ink: #1A1814;
+    --ink-soft: #56514A;
+    --ink-faint: #8A837A;
+    --gold: #A8842C;
+    --gold-soft: #C9A94F;
+    --rule: #E2DDD2;
+    --card: #FFFFFF;
+    --shadow: 0 1px 2px rgba(26,24,20,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14120E;
+      --ink: #EDE8DE;
+      --ink-soft: #A9A296;
+      --ink-faint: #7C7568;
+      --gold: #D4B45C;
+      --gold-soft: #A8842C;
+      --rule: #2B2721;
+      --card: #1C1913;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14120E;
+    --ink: #EDE8DE;
+    --ink-soft: #A9A296;
+    --ink-faint: #7C7568;
+    --gold: #D4B45C;
+    --gold-soft: #A8842C;
+    --rule: #2B2721;
+    --card: #1C1913;
+    --shadow: none;
+  }
+  :root[data-theme="light"] {
+    --paper: #FAF9F5;
+    --ink: #1A1814;
+    --ink-soft: #56514A;
+    --ink-faint: #8A837A;
+    --gold: #A8842C;
+    --gold-soft: #C9A94F;
+    --rule: #E2DDD2;
+    --card: #FFFFFF;
+    --shadow: 0 1px 2px rgba(26,24,20,.05);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 4rem 1.35rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  .eyebrow {
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin: 0 0 .9rem;
+  }
+
+  h1 {
+    font-family: Iowan Old Style, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0 0 1rem;
+  }
+
+  h2 {
+    font-family: Iowan Old Style, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.32rem;
+    line-height: 1.3;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0 0 .35rem;
+  }
+
+  .lede { color: var(--ink-soft); margin: 0; }
+
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 2.25rem; }
+
+  section { display: flex; flex-direction: column; gap: 1.15rem; }
+
+  p { margin: 0; }
+
+  .quote {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 3px;
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+  }
+
+  .quote p {
+    font-family: Iowan Old Style, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.06rem;
+    line-height: 1.6;
+  }
+
+  .attrib {
+    font-size: .82rem;
+    color: var(--ink-faint);
+    letter-spacing: .02em;
+  }
+
+  .attrib strong { color: var(--ink-soft); font-weight: 600; }
+
+  .note {
+    font-size: .93rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.15rem;
+  }
+
+  ul { margin: 0; padding-left: 1.15rem; display: flex; flex-direction: column; gap: .5rem; }
+  li { color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 600; }
+
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .fig { background: var(--card); padding: 1.1rem 1.15rem; }
+  .fig .n {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    display: block;
+    margin-bottom: .2rem;
+  }
+  .fig .l { font-size: .8rem; color: var(--ink-faint); line-height: 1.4; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.75rem;
+    font-size: .88rem;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  footer a { color: var(--gold); }
+
+  figure { margin: 0; display: flex; flex-direction: column; gap: .6rem; }
+  figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+  }
+  figcaption { font-size: .85rem; color: var(--ink-faint); }
+
+  a { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">AG1 Consulting</p>
+    <h1>What working with us is actually like</h1>
+    <p class="lede">Not a testimonial page. This is the day to day of it, in their words, including the parts that went slowly.</p>
+  </header>
+
+  <section>
+    <h2>The chaos problem</h2>
+    <div class="quote">
+      <p>"I didn't have a lead problem, I had a chaos problem. Enquiries landing in five places, quotes I forgot to chase. One system catches all of it now, and I've got real hours back every week."</p>
+      <p class="attrib"><strong>Owner</strong> &middot; standalone CRM and back-end build</p>
+    </div>
+    <p class="note">This is the most common shape of the problem. Almost nobody who calls us is short of enquiries. They are short of a way to catch the ones they already get.</p>
+  </section>
+
+  <section>
+    <h2>Burned by an agency first</h2>
+    <div class="quote">
+      <p>"I'd been burned by an agency before that just sent me a list of leads that went nowhere. This was different. They built the system behind the ads, not just the ads. We're booking noticeably more jobs a month and I'm not losing quotes anymore."</p>
+      <p class="attrib"><strong>Quoting manager and business partner</strong> &middot; roofing contractor &middot; ads and CRM build</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Replacing a previous agency</h2>
+    <div class="quote">
+      <p>"Website, search, ads and the follow-up all as one thing. First time my pipeline has actually felt predictable."</p>
+      <p class="attrib"><strong>Owner</strong> &middot; agricultural business &middot; full build, replacing a previous agency</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Seeing the money land</h2>
+    <div class="quote">
+      <p>"For the first time I could actually watch the money land instead of just hoping the reporting was right. Same number on their dashboard as on mine."</p>
+      <p class="attrib"><strong>Founder</strong> &middot; anonymised at their request</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>One campaign, with the bad number included</h2>
+    <p>A roofing client ran a test budget through Meta and Google. Here is what it actually did, rather than what we hoped it would do.</p>
+
+    <div class="figures">
+      <div class="fig"><span class="n">15</span><span class="l">appointments booked</span></div>
+      <div class="fig"><span class="n">~$167</span><span class="l">cost per booked appointment</span></div>
+      <div class="fig"><span class="n">13.3%</span><span class="l">close rate on those appointments</span></div>
+    </div>
+
+    <p class="note">The close rate is the number worth looking at, because it came in well below what we modelled. The system's job is filling the diary with booked, qualified appointments at a measurable cost. How many of those turn into signed jobs comes down to the sales process at the other end, and on this campaign that was the weak link. We would rather show you that than leave it out.</p>
+  </section>
+
+  <section>
+    <h2>The work itself</h2>
+    <p>Over 100 sites built across roofing, construction, legal, automotive and retail. All of it is clickable, which is the point. You can judge the standard yourself rather than take our word for it.</p>
+    <p class="note"><a href="https://ag1consulting.co/booked/">See the live sites and full audits</a></p>
+  </section>
+
+  <section>
+    <h2>How any of this is checkable</h2>
+    <p>Every build gets tracking wired in from day one, so nothing above is a story we are telling ourselves.</p>
+    <ul>
+      <li><strong>GA4 and conversion tracking</strong> installed on every site we touch</li>
+      <li><strong>Call tracking</strong>, so a booked job can be traced back to the campaign that produced it</li>
+      <li><strong>Live dashboards</strong>, so you see cost per enquiry and cost per booked job in real time, not in a monthly PDF</li>
+    </ul>
+    <p class="note">This is the part that makes the numbers above provable rather than anecdotal. The spend, the appointments and the outcome all sit on the same dashboard, and you have the login.</p>
+  </section>
+
+  <section>
+    <h2>What we will not tell you</h2>
+    <p>We will not give you a number of jobs or appointments before we have spoken. We do not know your area, your prices, or who you are up against. Anybody handing you that figure this early has made it up.</p>
+    <p>What we will do is show you the measurement, and be straight with you about which parts are our job and which parts are yours.</p>
+  </section>
+
+  <footer>
+    <p>AG1 Consulting Ltd &middot; registered in England and Wales</p>
+    <p><a href="https://ag1consulting.co">ag1consulting.co</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
