@@ -36,64 +36,55 @@ SMS_TEL = "+447846715676"
 BREAKOUT_VIDEOS = [
     {
         "icon": "mdi:fire-alert",
-        "q": "I have been burned by an agency before",
-        "teaser": "Why the lead-selling model produces the horror stories, and what we do instead of it.",
-        "loom": None,
+        "q": "I have been burned by an agency before (part 1)",
+        "teaser": "What we do not do, and why the lead-selling model produces the horror stories.",
+        "loom": "c147de96d8d942c0a52452920b4f06f2",
     },
     {
-        "icon": "mdi:calculator-variant-outline",
-        "q": "Will this actually work at my margin?",
-        "teaser": "The ad spend sum run properly, and the two honest ways round a thin margin.",
-        "loom": None,
+        "icon": "mdi:shield-check-outline",
+        "q": "I have been burned by an agency before (part 2)",
+        "teaser": "What we actually do instead, and how you hold us to it.",
+        "loom": "95eaf5e742684a7d9267ff401f99e591",
     },
     {
-        "icon": "mdi:account-tie-outline",
-        "q": "Who actually are you?",
-        "teaser": "AG1 Consulting Ltd, registered in England and Wales, founder-led. Where to go and check.",
-        "loom": None,
-    },
-    {
-        "icon": "mdi:vector-difference",
-        "q": "What makes you different from the last lot?",
-        "teaser": "The site, the search and the ads run as one system, with the follow-up built in behind it.",
-        "loom": None,
-    },
-    {
-        "icon": "mdi:calendar-clock-outline",
-        "q": "I am already flat out, I cannot take more on",
-        "teaser": "Being too busy is usually a reason to have this conversation, not a reason to skip it.",
-        "loom": None,
+        "icon": "mdi:target",
+        "q": "What is the Sniper Acquisition Method?",
+        "teaser": "The system itself, in plain terms, and why it is built the way it is.",
+        "loom": "073a8997c0c94ba386fe15300c83d09d",
     },
     {
         "icon": "mdi:filter-check-outline",
-        "q": "How do I know they will not be time-wasters?",
+        "q": "How do you make sure the appointments are qualified?",
         "teaser": "Where the qualifying happens, and why it happens before your phone ever rings.",
-        "loom": None,
+        "loom": "5621049bcafa425c9ff4c8cc7824c49b",
     },
     {
-        "icon": "mdi:timer-sand",
-        "q": "How long until I see anything?",
-        "teaser": "Honest timelines. The site and the follow-up work straight away. Search takes months.",
-        "loom": None,
+        "icon": "mdi:lock-outline",
+        "q": "Are the leads exclusive to me?",
+        "teaser": "Yours alone. How that differs from the directories, and what it means in writing.",
+        "loom": "06916a2c8f88486990e56f1d587da659",
     },
     {
-        "icon": "mdi:clipboard-check-outline",
-        "q": "What do I actually have to do?",
-        "teaser": "Close to nothing. We build it. You keep answering the phone the way you already do.",
-        "loom": None,
+        "icon": "mdi:account-tie-outline",
+        "q": "Why should I trust you?",
+        "teaser": "You should not, not yet. Here are the things you can go and check instead.",
+        "loom": "8fccfbf978804dc8a36821e9c5a8a759",
     },
-    {
-        "icon": "mdi:cash-multiple",
-        "q": "What is this going to cost me?",
-        "teaser": "The shape of the pricing, setup fee included, so nobody gets ambushed with a number.",
-        "loom": None,
-    },
-    {
-        "icon": "mdi:gesture-tap-button",
-        "q": "I am not technical, will I be able to use it?",
-        "teaser": "You will not be asked to learn any software. That is the entire point of hiring us.",
-        "loom": None,
-    },
+]
+
+# Filmed later, kept so the topics are not lost. Move an entry up into
+# BREAKOUT_VIDEOS with its loom id once the clip exists.
+UNFILMED_TOPICS = [
+    {"icon": "mdi:cash-multiple", "q": "What is this going to cost me?"},
+    {"icon": "mdi:timer-sand", "q": "How long until I see anything?"},
+    {"icon": "mdi:clipboard-check-outline", "q": "What do I actually have to do?"},
+    {"icon": "mdi:calendar-clock-outline", "q": "I am already flat out, I cannot take more on"},
+    {"icon": "mdi:calculator-variant-outline", "q": "Will this actually work at my margin?"},
+    {"icon": "mdi:gesture-tap-button", "q": "I am not technical, will I be able to use it?"},
+    {"icon": "mdi:vector-difference", "q": "What makes you different from the last lot?"},
+    {"icon": "mdi:file-document-outline", "q": "Do you lock me into a contract?"},
+    {"icon": "mdi:exit-run", "q": "What happens if I stop working with you?"},
+    {"icon": "mdi:account-hard-hat-outline", "q": "Why not just hire someone in-house?"},
 ]
 
 # ---------------------------------------------------------------- come-ready checklist
@@ -204,7 +195,7 @@ def render_demos():
     </a>""" for f, href, tag, title, blurb, cta in DEMOS)
 
 
-HTML = f"""<style>
+STYLE = f"""<style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap');
 :root{{--gold:#C9973A;--gold-bright:#E0BC63;--gold-deep:#B8922E;--bg:#050506;--panel:#0C0C11;
 --line:rgba(201,151,58,.2);--line2:rgba(201,151,58,.4);--text:#F5F2EB;--mute:#B7B2A7;--deep:#7E7A70;
@@ -293,17 +284,23 @@ figcaption span{{color:var(--mute);font-size:14px}}
 .demo-link{{color:var(--gold-bright);font-weight:700;font-size:14.5px}}
 .foot{{border-top:1px solid var(--line);padding:40px 0 70px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--deep)}}
 .foot .note{{color:var(--deep);font-size:12px;max-width:60ch;margin:0 auto 18px;font-family:var(--sans);letter-spacing:0;line-height:1.5}}
-</style>
+</style>"""
+
+HTML = STYLE + f"""
 <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 <div class="topbar"></div>
 <div class="wrap">
 
   <div class="hero">
     <div class="logo"><b>AG1</b> Consulting</div>
-    <div class="chip">You're booked</div>
-    <h1>Your call is <em>confirmed.</em></h1>
-    <p class="lede">Watch the quick video below so you know what to expect. Everything you would
-    normally have to ask me on the call is answered on this page, so you can turn up already knowing.</p>
+    <div class="chip">Your Zoom call has been scheduled</div>
+    <h1>Watch these quick videos to see how we generate <em>qualified appointments</em> using our
+    Sniper Acquisition Method.</h1>
+    <p class="lede">Everything you would normally have to ask me on the call is answered on this page,
+    so you can turn up already knowing.</p>
+    <p class="lede" style="margin-top:14px"><b>Important:</b> you will have had a text from me.
+    Reply <b>YES</b> to it so I know you are coming, and I will do the prep work on your business
+    before we speak rather than after.</p>
   </div>
 
   <section>
@@ -376,11 +373,59 @@ figcaption span{{color:var(--mute);font-size:14px}}
 </div>
 """
 
+# ---------------------------------------------------------------- questions page
+QUESTIONS_OUT = os.path.join(os.path.dirname(HERE), "questions", "index.html")
+
+QUESTIONS_HTML = STYLE + f"""
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<div class="topbar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="logo"><b>AG1</b> Consulting</div>
+    <div class="chip">Before we speak</div>
+    <h1>Get your questions <em>answered.</em></h1>
+    <p class="lede">Short answers to what nearly every roofing owner asks us, straight from me
+    rather than from a brochure. Watch the ones that apply to you, then hold me to them on the call.</p>
+  </div>
+
+  <section>
+    <div class="vgrid">
+{render_videos()}
+    </div>
+  </section>
+
+  <section>
+    <div class="cta">
+      <div class="eye">// Still on your mind</div>
+      <h2>Ask me the <em>rest.</em></h2>
+      <p>If the thing you are wondering about is not on this page, text it to me before the call
+      and I will answer it properly rather than off the cuff.</p>
+      <a class="btn" href="sms:{SMS_TEL}">
+        <iconify-icon icon="mdi:message-text-outline"></iconify-icon>
+        Text {SMS_NUMBER}
+      </a>
+    </div>
+  </section>
+
+  <div class="foot">
+    &copy; AG1 Consulting Ltd &middot; See you on the call
+  </div>
+
+</div>
+"""
+
+
 if __name__ == "__main__":
     assert "—" not in HTML and "–" not in HTML, "dash policy: hyphens only"
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(HTML)
     print(f"wrote {OUT} ({len(HTML)/1024/1024:.2f} MB)")
+    os.makedirs(os.path.dirname(QUESTIONS_OUT), exist_ok=True)
+    assert "—" not in QUESTIONS_HTML and "–" not in QUESTIONS_HTML, "dash policy: hyphens only"
+    with open(QUESTIONS_OUT, "w", encoding="utf-8") as f:
+        f.write(QUESTIONS_HTML)
+    print(f"wrote {QUESTIONS_OUT} ({len(QUESTIONS_HTML)/1024:.0f} KB)")
     print(f"breakout cards: {len(BREAKOUT_VIDEOS)} "
           f"({sum(1 for v in BREAKOUT_VIDEOS if v['loom'])} filmed, "
           f"{sum(1 for v in BREAKOUT_VIDEOS if not v['loom'])} placeholder)")
