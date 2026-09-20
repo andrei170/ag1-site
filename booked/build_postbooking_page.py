@@ -142,39 +142,21 @@ def data_uri(filename):
 
 
 def render_videos():
-    """Static Loom iframes, one per card. No JavaScript: a click-to-play
-    facade was tried on 2026-09-20 and did not play on the live page, so the
-    moving parts are gone. Six iframes is more weight on first paint and that
-    is the accepted trade for something that actually plays."""
+    """Question as a heading ABOVE the player, two columns, no card chrome.
+    Modelled on the layout Andrei asked for: the Loom embed supplies the real
+    video frame and play button, so no separate thumbnail asset is needed."""
     out = []
-    for i, v in enumerate(BREAKOUT_VIDEOS, start=1):
-        num = f"{i:02d}"
-        if v["loom"]:
-            out.append(f"""    <article class="vcard live">
+    for v in BREAKOUT_VIDEOS:
+        if not v["loom"]:
+            continue
+        out.append(f"""    <div class="vitem">
+      <h3 class="vq">{v['q']}</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/{v['loom']}" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="{v['q']}"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">{num}</span>
-        <h3>{v['q']}</h3>
-        <p>{v['teaser']}</p>
-      </div>
-    </article>""")
-        else:
-            out.append(f"""    <article class="vcard">
-      <div class="vthumb">
-        <iconify-icon class="vicon" icon="{v['icon']}"></iconify-icon>
-        <span class="vplay" aria-hidden="true"></span>
-        <span class="vbadge">Filming this week</span>
-      </div>
-      <div class="vbody">
-        <span class="vnum">{num}</span>
-        <h3>{v['q']}</h3>
-        <p>{v['teaser']}</p>
-      </div>
-    </article>""")
+    </div>""")
     return chr(10).join(out)
 
 
@@ -228,28 +210,15 @@ h2 em{{font-style:italic;color:var(--gold-bright)}}
 .grid{{display:grid;grid-template-columns:1fr 1fr;gap:20px}}
 @media(max-width:760px){{.grid{{grid-template-columns:1fr}}}}
 
-/* breakout video cards */
-.vembed{{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-bottom:1px solid var(--line);background:#000}}
+/* breakout videos: question above, player below, two columns */
+.vgrid{{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 30px}}
+@media(max-width:760px){{.vgrid{{grid-template-columns:1fr;gap:26px}}}}
+.vitem{{display:flex;flex-direction:column;gap:12px}}
+.vq{{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.6px;
+text-transform:uppercase;line-height:1.3;color:var(--gold-bright)}}
+.vembed{{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
+border-radius:12px;border:1px solid var(--line);background:#000}}
 .vembed iframe{{position:absolute;top:0;left:0;width:100%;height:100%;border:0}}
-.vgrid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}}
-.vcard{{display:flex;flex-direction:column;background:linear-gradient(150deg,rgba(201,151,58,.06),rgba(0,0,0,.3));
-border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:.18s}}
-.vcard.live:hover{{border-color:var(--line2);transform:translateY(-3px)}}
-.vthumb{{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
-border-bottom:1px solid var(--line);background:
-radial-gradient(420px 200px at 50% 120%,rgba(201,151,58,.16),transparent 70%),
-linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.55))}}
-.vicon{{font-size:44px;color:var(--gold);opacity:.75}}
-.vplay{{position:absolute;right:14px;bottom:14px;width:34px;height:34px;border-radius:50%;
-background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(201,151,58,.35)}}
-.vplay:after{{content:"";border-left:11px solid #000;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}}
-.vbadge{{position:absolute;left:12px;top:12px;font-family:var(--mono);font-size:10px;letter-spacing:1.6px;
-text-transform:uppercase;color:var(--deep);border:1px solid var(--line);background:rgba(0,0,0,.45);padding:3px 8px;border-radius:6px}}
-.vbadge.live{{color:var(--gold-bright);border-color:var(--line2);background:rgba(201,151,58,.12)}}
-.vbody{{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}}
-.vnum{{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold)}}
-.vcard h3{{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.2}}
-.vcard p{{color:var(--mute);font-size:14px}}
 
 /* come-ready checklist */
 .prep{{max-width:760px;margin:0 auto;background:linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.4));

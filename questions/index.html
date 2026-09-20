@@ -24,28 +24,15 @@ h2 em{font-style:italic;color:var(--gold-bright)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
 
-/* breakout video cards */
-.vembed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-bottom:1px solid var(--line);background:#000}
+/* breakout videos: question above, player below, two columns */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 30px}
+@media(max-width:760px){.vgrid{grid-template-columns:1fr;gap:26px}}
+.vitem{display:flex;flex-direction:column;gap:12px}
+.vq{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.6px;
+text-transform:uppercase;line-height:1.3;color:var(--gold-bright)}
+.vembed{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
+border-radius:12px;border:1px solid var(--line);background:#000}
 .vembed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
-.vcard{display:flex;flex-direction:column;background:linear-gradient(150deg,rgba(201,151,58,.06),rgba(0,0,0,.3));
-border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:.18s}
-.vcard.live:hover{border-color:var(--line2);transform:translateY(-3px)}
-.vthumb{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
-border-bottom:1px solid var(--line);background:
-radial-gradient(420px 200px at 50% 120%,rgba(201,151,58,.16),transparent 70%),
-linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.55))}
-.vicon{font-size:44px;color:var(--gold);opacity:.75}
-.vplay{position:absolute;right:14px;bottom:14px;width:34px;height:34px;border-radius:50%;
-background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(201,151,58,.35)}
-.vplay:after{content:"";border-left:11px solid #000;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
-.vbadge{position:absolute;left:12px;top:12px;font-family:var(--mono);font-size:10px;letter-spacing:1.6px;
-text-transform:uppercase;color:var(--deep);border:1px solid var(--line);background:rgba(0,0,0,.45);padding:3px 8px;border-radius:6px}
-.vbadge.live{color:var(--gold-bright);border-color:var(--line2);background:rgba(201,151,58,.12)}
-.vbody{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
-.vnum{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold)}
-.vcard h3{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.2}
-.vcard p{color:var(--mute);font-size:14px}
 
 /* come-ready checklist */
 .prep{max-width:760px;margin:0 auto;background:linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.4));
@@ -104,78 +91,54 @@ figcaption span{color:var(--mute);font-size:14px}
 
   <section>
     <div class="vgrid">
-    <article class="vcard live">
+    <div class="vitem">
+      <h3 class="vq">I have been burned by an agency before (part 1)</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/c147de96d8d942c0a52452920b4f06f2" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="I have been burned by an agency before (part 1)"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">01</span>
-        <h3>I have been burned by an agency before (part 1)</h3>
-        <p>What we do not do, and why the lead-selling model produces the horror stories.</p>
-      </div>
-    </article>
-    <article class="vcard live">
+    </div>
+    <div class="vitem">
+      <h3 class="vq">I have been burned by an agency before (part 2)</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/95eaf5e742684a7d9267ff401f99e591" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="I have been burned by an agency before (part 2)"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">02</span>
-        <h3>I have been burned by an agency before (part 2)</h3>
-        <p>What we actually do instead, and how you hold us to it.</p>
-      </div>
-    </article>
-    <article class="vcard live">
+    </div>
+    <div class="vitem">
+      <h3 class="vq">What is the Sniper Acquisition Method?</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/073a8997c0c94ba386fe15300c83d09d" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="What is the Sniper Acquisition Method?"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">03</span>
-        <h3>What is the Sniper Acquisition Method?</h3>
-        <p>The system itself, in plain terms, and why it is built the way it is.</p>
-      </div>
-    </article>
-    <article class="vcard live">
+    </div>
+    <div class="vitem">
+      <h3 class="vq">How do you make sure the appointments are qualified?</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/5621049bcafa425c9ff4c8cc7824c49b" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="How do you make sure the appointments are qualified?"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">04</span>
-        <h3>How do you make sure the appointments are qualified?</h3>
-        <p>Where the qualifying happens, and why it happens before your phone ever rings.</p>
-      </div>
-    </article>
-    <article class="vcard live">
+    </div>
+    <div class="vitem">
+      <h3 class="vq">Are the leads exclusive to me?</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/06916a2c8f88486990e56f1d587da659" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="Are the leads exclusive to me?"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">05</span>
-        <h3>Are the leads exclusive to me?</h3>
-        <p>Yours alone. How that differs from the directories, and what it means in writing.</p>
-      </div>
-    </article>
-    <article class="vcard live">
+    </div>
+    <div class="vitem">
+      <h3 class="vq">Why should I trust you?</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/8fccfbf978804dc8a36821e9c5a8a759" frameborder="0"
                 webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="Why should I trust you?"></iframe>
       </div>
-      <div class="vbody">
-        <span class="vnum">06</span>
-        <h3>Why should I trust you?</h3>
-        <p>You should not, not yet. Here are the things you can go and check instead.</p>
-      </div>
-    </article>
+    </div>
     </div>
   </section>
 
