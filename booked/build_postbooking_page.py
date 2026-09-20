@@ -142,33 +142,59 @@ def data_uri(filename):
 
 
 def render_videos():
+    """Click-to-play cards. The iframe is only created on click, so six videos
+    cost nothing until a prospect actually wants one. The <a> stays as the
+    href so the card still works with JS off and right-click/open-in-new-tab
+    behaves normally."""
     out = []
     for i, v in enumerate(BREAKOUT_VIDEOS, start=1):
         num = f"{i:02d}"
         if v["loom"]:
-            tag = "a"
-            attrs = (f' href="https://www.loom.com/share/{v["loom"]}"'
-                     ' target="_blank" rel="noopener"')
-            badge = '<span class="vbadge live">Watch</span>'
-            cls = "vcard live"
-        else:
-            tag = "article"
-            attrs = ""
-            badge = '<span class="vbadge">Filming this week</span>'
-            cls = "vcard"
-        out.append(f"""    <{tag} class="{cls}"{attrs}>
+            out.append(f"""    <a class="vcard live" href="https://www.loom.com/share/{v['loom']}"
+       target="_blank" rel="noopener" data-loom="{v['loom']}">
       <div class="vthumb">
         <iconify-icon class="vicon" icon="{v['icon']}"></iconify-icon>
         <span class="vplay" aria-hidden="true"></span>
-        {badge}
+        <span class="vbadge live">Watch</span>
       </div>
       <div class="vbody">
         <span class="vnum">{num}</span>
         <h3>{v['q']}</h3>
         <p>{v['teaser']}</p>
       </div>
-    </{tag}>""")
-    return "\n".join(out)
+    </a>""")
+        else:
+            out.append(f"""    <article class="vcard">
+      <div class="vthumb">
+        <iconify-icon class="vicon" icon="{v['icon']}"></iconify-icon>
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vbadge">Filming this week</span>
+      </div>
+      <div class="vbody">
+        <span class="vnum">{num}</span>
+        <h3>{v['q']}</h3>
+        <p>{v['teaser']}</p>
+      </div>
+    </article>""")
+    return chr(10).join(out)
+
+
+PLAYER_JS = """<script>
+(function(){
+  document.querySelectorAll('.vcard.live[data-loom]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) return;
+      card.classList.add('playing');
+      var thumb = card.querySelector('.vthumb');
+      thumb.innerHTML = '<iframe src="https://www.loom.com/embed/' + card.dataset.loom +
+        '?hideEmbedTopBar=true&autoplay=1" frameborder="0" allow="autoplay; fullscreen"' +
+        ' allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
+    });
+  });
+})();
+</script>"""
 
 
 def render_checklist():
@@ -222,6 +248,8 @@ h2 em{{font-style:italic;color:var(--gold-bright)}}
 @media(max-width:760px){{.grid{{grid-template-columns:1fr}}}}
 
 /* breakout video cards */
+.vcard.playing .vthumb{{position:relative;cursor:default}}
+.vcard.playing{{cursor:default}}
 .vgrid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}}
 .vcard{{display:flex;flex-direction:column;background:linear-gradient(150deg,rgba(201,151,58,.06),rgba(0,0,0,.3));
 border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:.18s}}
@@ -372,6 +400,7 @@ HTML = STYLE + f"""
   </div>
 
 </div>
+{PLAYER_JS}
 """
 
 # ---------------------------------------------------------------- questions page
@@ -414,6 +443,7 @@ QUESTIONS_HTML = STYLE + f"""
   </div>
 
 </div>
+{PLAYER_JS}
 """
 
 
