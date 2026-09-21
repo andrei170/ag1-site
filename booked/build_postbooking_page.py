@@ -27,8 +27,10 @@ ASSETS = os.path.join(HERE, "assets")
 OUT = os.path.join(HERE, "index.html")
 
 LOOM_MAIN = "9a4149d29c8d4f3f998eda6c3f45719f"
-SMS_NUMBER = "+44 7846 715676"
+SMS_NUMBER = "+44 7846 715676"          # UK, already wired into the confirm CTA
 SMS_TEL = "+447846715676"
+US_NUMBER = "+1 786 396 6358"           # US
+US_TEL = "+17863966358"
 
 # ---------------------------------------------------------------- breakout videos
 # One card per objection, ranked as they appeared in the recorded sales calls.
@@ -261,6 +263,8 @@ align-items:center;justify-content:center;transition:.18s}}
 .vplaybtn:after{{content:"";border-left:19px solid #fff;border-top:12px solid transparent;
 border-bottom:12px solid transparent;margin-left:6px}}
 .vembed:hover .vplaybtn:after{{border-left-color:#000}}
+.ctabtns{{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}}
+@media(max-width:520px){{.ctabtns{{flex-direction:column;align-items:stretch}}}}
 .vlink{{font-family:var(--sans);font-size:13px;color:var(--mute);text-decoration:none;
 border-bottom:1px solid var(--line2);align-self:flex-start;padding-bottom:1px;transition:.15s}}
 .vlink:hover{{color:var(--gold-bright);border-color:var(--gold)}}
@@ -363,10 +367,16 @@ HTML = STYLE + f"""
       <h2>Confirm your <em>call.</em></h2>
       <p>You will have had a text from me. Reply <b>YES</b> to it and I will know you are coming,
       which means I will do the prep work on your business before we speak rather than after.</p>
-      <a class="btn" href="sms:{SMS_TEL}?&amp;body=YES">
-        <iconify-icon icon="mdi:message-reply-text-outline"></iconify-icon>
-        Text YES to confirm
-      </a>
+      <div class="ctabtns">
+        <a class="btn" href="sms:{SMS_TEL}?&amp;body=YES">
+          <iconify-icon icon="mdi:message-reply-text-outline"></iconify-icon>
+          Text YES &middot; UK {SMS_NUMBER}
+        </a>
+        <a class="btn" href="sms:{US_TEL}?&amp;body=YES">
+          <iconify-icon icon="mdi:message-reply-text-outline"></iconify-icon>
+          Text YES &middot; US {US_NUMBER}
+        </a>
+      </div>
       <p class="ctanote">If something has come up and the time no longer works, text me and we will
       move it. I would rather move it than have you sat in a van missing it.</p>
     </div>
@@ -436,10 +446,16 @@ QUESTIONS_HTML = STYLE + f"""
       <h2>Ask me the <em>rest.</em></h2>
       <p>If the thing you are wondering about is not on this page, text it to me before the call
       and I will answer it properly rather than off the cuff.</p>
-      <a class="btn" href="sms:{SMS_TEL}">
-        <iconify-icon icon="mdi:message-text-outline"></iconify-icon>
-        Text me
-      </a>
+      <div class="ctabtns">
+        <a class="btn" href="sms:{SMS_TEL}">
+          <iconify-icon icon="mdi:message-text-outline"></iconify-icon>
+          Text UK {SMS_NUMBER}
+        </a>
+        <a class="btn" href="sms:{US_TEL}">
+          <iconify-icon icon="mdi:message-text-outline"></iconify-icon>
+          Text US {US_NUMBER}
+        </a>
+      </div>
     </div>
   </section>
 
@@ -483,7 +499,10 @@ WATCH_HTML = STYLE + f"""
       <h2>Ask me the <em>rest.</em></h2>
       <p>If the thing you are wondering about is not on this page, text it to me before the call
       and I will answer it properly rather than off the cuff.</p>
-      <a class="btn" href="sms:{SMS_TEL}">Text me</a>
+      <div class="ctabtns">
+        <a class="btn" href="sms:{SMS_TEL}">Text UK {SMS_NUMBER}</a>
+        <a class="btn" href="sms:{US_TEL}">Text US {US_NUMBER}</a>
+      </div>
     </div>
   </section>
 

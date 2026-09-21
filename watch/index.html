@@ -43,6 +43,8 @@ align-items:center;justify-content:center;transition:.18s}
 .vplaybtn:after{content:"";border-left:19px solid #fff;border-top:12px solid transparent;
 border-bottom:12px solid transparent;margin-left:6px}
 .vembed:hover .vplaybtn:after{border-left-color:#000}
+.ctabtns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+@media(max-width:520px){.ctabtns{flex-direction:column;align-items:stretch}}
 .vlink{font-family:var(--sans);font-size:13px;color:var(--mute);text-decoration:none;
 border-bottom:1px solid var(--line2);align-self:flex-start;padding-bottom:1px;transition:.15s}
 .vlink:hover{color:var(--gold-bright);border-color:var(--gold)}
@@ -178,7 +180,10 @@ figcaption span{color:var(--mute);font-size:14px}
       <h2>Ask me the <em>rest.</em></h2>
       <p>If the thing you are wondering about is not on this page, text it to me before the call
       and I will answer it properly rather than off the cuff.</p>
-      <a class="btn" href="sms:+447846715676">Text me</a>
+      <div class="ctabtns">
+        <a class="btn" href="sms:+447846715676">Text UK +44 7846 715676</a>
+        <a class="btn" href="sms:+17863966358">Text US +1 786 396 6358</a>
+      </div>
     </div>
   </section>
 
