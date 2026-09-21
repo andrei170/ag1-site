@@ -447,6 +447,49 @@ QUESTIONS_HTML = STYLE + f"""
 """
 
 
+# ---------------------------------------------------------------- temporary link-out page
+# /watch/ - same thumbnails, but every card OPENS LOOM IN A NEW TAB instead of
+# embedding. No PLAYER_JS, so the anchor's href is followed normally. Built
+# 2026-09-21 because the in-page embeds were not playing and the cause was not
+# yet established; this sidesteps the embed path entirely.
+WATCH_OUT = os.path.join(os.path.dirname(HERE), "watch", "index.html")
+
+WATCH_HTML = STYLE + f"""
+<div class="topbar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="logo"><b>AG1</b> Consulting</div>
+    <div class="chip">Before we speak</div>
+    <h1>Get your questions <em>answered.</em></h1>
+    <p class="lede">Short answers to what nearly every roofing owner asks us, straight from me
+    rather than from a brochure. Click any one to watch it. Then hold me to them on the call.</p>
+  </div>
+
+  <section>
+    <div class="vgrid">
+{render_videos()}
+    </div>
+  </section>
+
+  <section>
+    <div class="cta">
+      <div class="eye">// Still on your mind</div>
+      <h2>Ask me the <em>rest.</em></h2>
+      <p>If the thing you are wondering about is not on this page, text it to me before the call
+      and I will answer it properly rather than off the cuff.</p>
+      <a class="btn" href="sms:{SMS_TEL}">Text me</a>
+    </div>
+  </section>
+
+  <div class="foot">
+    &copy; AG1 Consulting Ltd &middot; See you on the call
+  </div>
+
+</div>
+"""
+
+
 if __name__ == "__main__":
     assert "—" not in HTML and "–" not in HTML, "dash policy: hyphens only"
     with open(OUT, "w", encoding="utf-8") as f:
@@ -457,6 +500,11 @@ if __name__ == "__main__":
     with open(QUESTIONS_OUT, "w", encoding="utf-8") as f:
         f.write(QUESTIONS_HTML)
     print(f"wrote {QUESTIONS_OUT} ({len(QUESTIONS_HTML)/1024:.0f} KB)")
+    os.makedirs(os.path.dirname(WATCH_OUT), exist_ok=True)
+    assert "—" not in WATCH_HTML and "–" not in WATCH_HTML, "dash policy: hyphens only"
+    with open(WATCH_OUT, "w", encoding="utf-8") as f:
+        f.write(WATCH_HTML)
+    print(f"wrote {WATCH_OUT} ({len(WATCH_HTML)/1024:.0f} KB)")
     print(f"breakout cards: {len(BREAKOUT_VIDEOS)} "
           f"({sum(1 for v in BREAKOUT_VIDEOS if v['loom'])} filmed, "
           f"{sum(1 for v in BREAKOUT_VIDEOS if not v['loom'])} placeholder)")

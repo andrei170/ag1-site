@@ -1,0 +1,174 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap');
+:root{--gold:#C9973A;--gold-bright:#E0BC63;--gold-deep:#B8922E;--bg:#050506;--panel:#0C0C11;
+--line:rgba(201,151,58,.2);--line2:rgba(201,151,58,.4);--text:#F5F2EB;--mute:#B7B2A7;--deep:#7E7A70;
+--serif:'Cormorant Garamond',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;--mono:ui-monospace,Consolas,monospace;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;
+background-image:radial-gradient(900px 480px at 82% -6%,rgba(201,151,58,.1),transparent 60%),radial-gradient(760px 440px at 6% 3%,rgba(201,151,58,.06),transparent 60%);background-attachment:fixed}
+.topbar{position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright)50%,var(--gold-deep));z-index:10}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.eye{font-family:var(--mono);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.hero{padding:100px 0 26px;text-align:center}
+.logo{font-family:var(--serif);font-weight:700;font-size:22px;margin-bottom:40px}
+.logo b{color:var(--gold)}
+.chip{display:inline-block;padding:7px 16px;border:1px solid var(--line2);border-radius:999px;background:rgba(201,151,58,.1);color:var(--gold-bright);font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.02;letter-spacing:-.5px;margin-bottom:16px}
+h1 em{font-style:italic;color:var(--gold-bright)}
+.lede{color:var(--mute);font-size:clamp(16px,1.9vw,20px);max-width:56ch;margin:0 auto}
+section{padding:46px 0}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.8rem,3.6vw,2.6rem);text-align:center;margin-bottom:8px}
+h2 em{font-style:italic;color:var(--gold-bright)}
+.sub{color:var(--mute);text-align:center;max-width:52ch;margin:0 auto 30px}
+.sub a{color:var(--gold-bright)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+/* breakout videos: question above, poster below, two columns */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 30px}
+@media(max-width:760px){.vgrid{grid-template-columns:1fr;gap:26px}}
+.vitem{display:flex;flex-direction:column;gap:12px}
+.vq{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.6px;
+text-transform:uppercase;line-height:1.3;color:var(--gold-bright)}
+.vembed{position:relative;display:block;width:100%;aspect-ratio:16/9;min-height:190px;
+overflow:hidden;border-radius:12px;border:1px solid var(--line);background:#000;
+cursor:pointer;transition:.18s}
+.vembed:hover{border-color:var(--line2);transform:translateY(-2px)}
+.vembed img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
+.vembed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
+.vplaybtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;
+border-radius:50%;background:rgba(0,0,0,.55);border:2px solid #fff;display:flex;
+align-items:center;justify-content:center;transition:.18s}
+.vembed:hover .vplaybtn{background:var(--gold);border-color:var(--gold)}
+.vplaybtn:after{content:"";border-left:19px solid #fff;border-top:12px solid transparent;
+border-bottom:12px solid transparent;margin-left:6px}
+.vembed:hover .vplaybtn:after{border-left-color:#000}
+
+/* come-ready checklist */
+.prep{max-width:760px;margin:0 auto;background:linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.4));
+border:1px solid var(--line2);border-radius:18px;padding:30px 36px}
+@media(max-width:600px){.prep{padding:24px 20px}}
+.expect{list-style:none}
+.expect li{display:flex;gap:16px;align-items:flex-start;padding:15px 0;border-bottom:1px solid var(--line)}
+.expect li:last-child{border-bottom:none;padding-bottom:0}
+.expect li div{display:flex;flex-direction:column}
+.expect b{color:var(--text);font-size:16px}
+.expect span{color:var(--mute);font-size:14.5px}
+.cicon{font-size:22px;color:var(--gold);flex:0 0 auto;margin-top:3px}
+
+/* confirm CTA */
+.cta{max-width:760px;margin:0 auto;text-align:center;background:linear-gradient(150deg,rgba(201,151,58,.14),rgba(0,0,0,.45));
+border:1px solid var(--line2);border-radius:18px;padding:38px 36px}
+@media(max-width:600px){.cta{padding:28px 20px}}
+.cta h2{margin-bottom:10px}
+.cta p{color:var(--mute);max-width:48ch;margin:0 auto 24px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--gold-deep),var(--gold));
+color:#0A0A0C;font-weight:700;font-size:16px;text-decoration:none;padding:15px 30px;border-radius:999px;
+box-shadow:0 12px 34px rgba(201,151,58,.28);transition:.18s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,151,58,.36)}
+.btn iconify-icon{font-size:20px}
+.ctanum{font-family:var(--mono);font-size:13px;letter-spacing:1px;color:var(--gold-bright);margin-top:18px}
+.ctanote{font-size:13px;color:var(--deep);max-width:46ch;margin:12px auto 0}
+
+.shot{background:linear-gradient(150deg,rgba(201,151,58,.06),rgba(0,0,0,.3));border:1px solid var(--line);border-radius:16px;padding:14px}
+.shot img{width:100%;border-radius:10px;display:block;background:#fff}
+figcaption{display:flex;flex-direction:column;gap:2px;padding:14px 6px 4px}
+figcaption b{font-family:var(--serif);font-size:24px;color:var(--gold-bright);font-weight:700}
+figcaption span{color:var(--mute);font-size:14px}
+.demo{display:flex;flex-direction:column;background:linear-gradient(150deg,rgba(201,151,58,.06),rgba(0,0,0,.3));border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;transition:.18s;color:inherit}
+.demo:hover{border-color:var(--line2);transform:translateY(-3px)}
+.demo-thumb{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#fff}
+.demo-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.demo-body{padding:20px 22px}
+.demo h3{font-family:var(--serif);font-size:23px;font-weight:600;margin-bottom:6px}
+.demo p{color:var(--mute);font-size:14.5px;margin-bottom:14px}
+.demo-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);background:rgba(201,151,58,.12);border:1px solid var(--line);padding:3px 9px;border-radius:6px;margin-bottom:10px}
+.demo-link{color:var(--gold-bright);font-weight:700;font-size:14.5px}
+.foot{border-top:1px solid var(--line);padding:40px 0 70px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--deep)}
+.foot .note{color:var(--deep);font-size:12px;max-width:60ch;margin:0 auto 18px;font-family:var(--sans);letter-spacing:0;line-height:1.5}
+</style>
+<div class="topbar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="logo"><b>AG1</b> Consulting</div>
+    <div class="chip">Before we speak</div>
+    <h1>Get your questions <em>answered.</em></h1>
+    <p class="lede">Short answers to what nearly every roofing owner asks us, straight from me
+    rather than from a brochure. Click any one to watch it. Then hold me to them on the call.</p>
+  </div>
+
+  <section>
+    <div class="vgrid">
+    <div class="vitem">
+      <h3 class="vq">I have been burned by an agency before (part 1)</h3>
+      <a class="vembed" href="https://www.loom.com/share/c147de96d8d942c0a52452920b4f06f2"
+         target="_blank" rel="noopener"
+         data-loom="c147de96d8d942c0a52452920b4f06f2" aria-label="Play: I have been burned by an agency before (part 1)">
+        <img src="https://cdn.loom.com/sessions/thumbnails/c147de96d8d942c0a52452920b4f06f2-fb60c41c1b426ec7.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="vitem">
+      <h3 class="vq">I have been burned by an agency before (part 2)</h3>
+      <a class="vembed" href="https://www.loom.com/share/95eaf5e742684a7d9267ff401f99e591"
+         target="_blank" rel="noopener"
+         data-loom="95eaf5e742684a7d9267ff401f99e591" aria-label="Play: I have been burned by an agency before (part 2)">
+        <img src="https://cdn.loom.com/sessions/thumbnails/95eaf5e742684a7d9267ff401f99e591-7bc446c783b6cdd8.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="vitem">
+      <h3 class="vq">What is the Sniper Acquisition Method?</h3>
+      <a class="vembed" href="https://www.loom.com/share/073a8997c0c94ba386fe15300c83d09d"
+         target="_blank" rel="noopener"
+         data-loom="073a8997c0c94ba386fe15300c83d09d" aria-label="Play: What is the Sniper Acquisition Method?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/073a8997c0c94ba386fe15300c83d09d-0f21e844976e1c6e.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="vitem">
+      <h3 class="vq">How do you make sure the appointments are qualified?</h3>
+      <a class="vembed" href="https://www.loom.com/share/5621049bcafa425c9ff4c8cc7824c49b"
+         target="_blank" rel="noopener"
+         data-loom="5621049bcafa425c9ff4c8cc7824c49b" aria-label="Play: How do you make sure the appointments are qualified?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/5621049bcafa425c9ff4c8cc7824c49b-57a24089f793de59.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="vitem">
+      <h3 class="vq">Are the leads exclusive to me?</h3>
+      <a class="vembed" href="https://www.loom.com/share/06916a2c8f88486990e56f1d587da659"
+         target="_blank" rel="noopener"
+         data-loom="06916a2c8f88486990e56f1d587da659" aria-label="Play: Are the leads exclusive to me?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/06916a2c8f88486990e56f1d587da659-1a1ad1fab2789af0.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="vitem">
+      <h3 class="vq">Why should I trust you?</h3>
+      <a class="vembed" href="https://www.loom.com/share/8fccfbf978804dc8a36821e9c5a8a759"
+         target="_blank" rel="noopener"
+         data-loom="8fccfbf978804dc8a36821e9c5a8a759" aria-label="Play: Why should I trust you?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/8fccfbf978804dc8a36821e9c5a8a759-4a9ac0f24bd82bfe.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta">
+      <div class="eye">// Still on your mind</div>
+      <h2>Ask me the <em>rest.</em></h2>
+      <p>If the thing you are wondering about is not on this page, text it to me before the call
+      and I will answer it properly rather than off the cuff.</p>
+      <a class="btn" href="sms:+447846715676">Text me</a>
+    </div>
+  </section>
+
+  <div class="foot">
+    &copy; AG1 Consulting Ltd &middot; See you on the call
+  </div>
+
+</div>
