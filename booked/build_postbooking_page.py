@@ -39,36 +39,42 @@ BREAKOUT_VIDEOS = [
         "q": "I have been burned by an agency before (part 1)",
         "teaser": "What we do not do, and why the lead-selling model produces the horror stories.",
         "loom": "c147de96d8d942c0a52452920b4f06f2",
+        "thumb": "c147de96d8d942c0a52452920b4f06f2-fb60c41c1b426ec7",
     },
     {
         "icon": "mdi:shield-check-outline",
         "q": "I have been burned by an agency before (part 2)",
         "teaser": "What we actually do instead, and how you hold us to it.",
         "loom": "95eaf5e742684a7d9267ff401f99e591",
+        "thumb": "95eaf5e742684a7d9267ff401f99e591-7bc446c783b6cdd8",
     },
     {
         "icon": "mdi:target",
         "q": "What is the Sniper Acquisition Method?",
         "teaser": "The system itself, in plain terms, and why it is built the way it is.",
         "loom": "073a8997c0c94ba386fe15300c83d09d",
+        "thumb": "073a8997c0c94ba386fe15300c83d09d-0f21e844976e1c6e",
     },
     {
         "icon": "mdi:filter-check-outline",
         "q": "How do you make sure the appointments are qualified?",
         "teaser": "Where the qualifying happens, and why it happens before your phone ever rings.",
         "loom": "5621049bcafa425c9ff4c8cc7824c49b",
+        "thumb": "5621049bcafa425c9ff4c8cc7824c49b-57a24089f793de59",
     },
     {
         "icon": "mdi:lock-outline",
         "q": "Are the leads exclusive to me?",
         "teaser": "Yours alone. How that differs from the directories, and what it means in writing.",
         "loom": "06916a2c8f88486990e56f1d587da659",
+        "thumb": "06916a2c8f88486990e56f1d587da659-1a1ad1fab2789af0",
     },
     {
         "icon": "mdi:account-tie-outline",
         "q": "Why should I trust you?",
         "teaser": "You should not, not yet. Here are the things you can go and check instead.",
         "loom": "8fccfbf978804dc8a36821e9c5a8a759",
+        "thumb": "8fccfbf978804dc8a36821e9c5a8a759-4a9ac0f24bd82bfe",
     },
 ]
 
@@ -142,22 +148,46 @@ def data_uri(filename):
 
 
 def render_videos():
-    """Question as a heading ABOVE the player, two columns, no card chrome.
-    Modelled on the layout Andrei asked for: the Loom embed supplies the real
-    video frame and play button, so no separate thumbnail asset is needed."""
+    """Real Loom thumbnail as a poster, iframe created only on click.
+
+    Why a facade and not six live iframes: six Loom players initialising at
+    once starve each other. Proved by screenshotting the live page twice on
+    2026-09-21 - a DIFFERENT video rendered each run and the rest stayed
+    black. Non-deterministic, which is why it read as random.
+
+    The poster is Loom's own thumbnail from its oEmbed endpoint, with .gif
+    swapped for .jpg: 44-101KB instead of 1.4-3.4MB."""
     out = []
     for v in BREAKOUT_VIDEOS:
-        if not v["loom"]:
+        if not v.get("loom"):
             continue
+        thumb = (f"https://cdn.loom.com/sessions/thumbnails/{v['thumb']}.jpg"
+                 if v.get("thumb") else "")
         out.append(f"""    <div class="vitem">
       <h3 class="vq">{v['q']}</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/{v['loom']}" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="{v['q']}"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/{v['loom']}"
+         target="_blank" rel="noopener"
+         data-loom="{v['loom']}" aria-label="Play: {v['q']}">
+        <img src="{thumb}" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>""")
     return chr(10).join(out)
+
+
+PLAYER_JS = """<script>
+document.querySelectorAll('a.vembed[data-loom]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    if (a.dataset.playing) return;
+    a.dataset.playing = '1';
+    a.innerHTML = '<iframe src="https://www.loom.com/embed/' + a.dataset.loom +
+      '?autoplay=1" frameborder="0" allow="autoplay; fullscreen"' +
+      ' allowfullscreen></iframe>';
+  });
+});
+</script>"""
 
 
 def render_checklist():
@@ -210,17 +240,25 @@ h2 em{{font-style:italic;color:var(--gold-bright)}}
 .grid{{display:grid;grid-template-columns:1fr 1fr;gap:20px}}
 @media(max-width:760px){{.grid{{grid-template-columns:1fr}}}}
 
-/* breakout videos: question above, player below, two columns */
+/* breakout videos: question above, poster below, two columns */
 .vgrid{{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 30px}}
 @media(max-width:760px){{.vgrid{{grid-template-columns:1fr;gap:26px}}}}
 .vitem{{display:flex;flex-direction:column;gap:12px}}
 .vq{{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.6px;
 text-transform:uppercase;line-height:1.3;color:var(--gold-bright)}}
-.vembed{{position:relative;width:100%;aspect-ratio:16/9;min-height:200px;overflow:hidden;
-border-radius:12px;border:1px solid var(--line);background:#000}}
-/* padding-bottom + height:0 collapses inside a flex column; aspect-ratio does not,
-   and min-height is the floor if aspect-ratio is unsupported. */
+.vembed{{position:relative;display:block;width:100%;aspect-ratio:16/9;min-height:190px;
+overflow:hidden;border-radius:12px;border:1px solid var(--line);background:#000;
+cursor:pointer;transition:.18s}}
+.vembed:hover{{border-color:var(--line2);transform:translateY(-2px)}}
+.vembed img{{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}}
 .vembed iframe{{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}}
+.vplaybtn{{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;
+border-radius:50%;background:rgba(0,0,0,.55);border:2px solid #fff;display:flex;
+align-items:center;justify-content:center;transition:.18s}}
+.vembed:hover .vplaybtn{{background:var(--gold);border-color:var(--gold)}}
+.vplaybtn:after{{content:"";border-left:19px solid #fff;border-top:12px solid transparent;
+border-bottom:12px solid transparent;margin-left:6px}}
+.vembed:hover .vplaybtn:after{{border-left-color:#000}}
 
 /* come-ready checklist */
 .prep{{max-width:760px;margin:0 auto;background:linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.4));
@@ -351,6 +389,7 @@ HTML = STYLE + f"""
   </div>
 
 </div>
+{PLAYER_JS}
 """
 
 # ---------------------------------------------------------------- questions page
@@ -404,6 +443,7 @@ QUESTIONS_HTML = STYLE + f"""
   </div>
 
 </div>
+{PLAYER_JS}
 """
 
 

@@ -24,17 +24,25 @@ h2 em{font-style:italic;color:var(--gold-bright)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
 
-/* breakout videos: question above, player below, two columns */
+/* breakout videos: question above, poster below, two columns */
 .vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 30px}
 @media(max-width:760px){.vgrid{grid-template-columns:1fr;gap:26px}}
 .vitem{display:flex;flex-direction:column;gap:12px}
 .vq{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.6px;
 text-transform:uppercase;line-height:1.3;color:var(--gold-bright)}
-.vembed{position:relative;width:100%;aspect-ratio:16/9;min-height:200px;overflow:hidden;
-border-radius:12px;border:1px solid var(--line);background:#000}
-/* padding-bottom + height:0 collapses inside a flex column; aspect-ratio does not,
-   and min-height is the floor if aspect-ratio is unsupported. */
+.vembed{position:relative;display:block;width:100%;aspect-ratio:16/9;min-height:190px;
+overflow:hidden;border-radius:12px;border:1px solid var(--line);background:#000;
+cursor:pointer;transition:.18s}
+.vembed:hover{border-color:var(--line2);transform:translateY(-2px)}
+.vembed img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
 .vembed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
+.vplaybtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;
+border-radius:50%;background:rgba(0,0,0,.55);border:2px solid #fff;display:flex;
+align-items:center;justify-content:center;transition:.18s}
+.vembed:hover .vplaybtn{background:var(--gold);border-color:var(--gold)}
+.vplaybtn:after{content:"";border-left:19px solid #fff;border-top:12px solid transparent;
+border-bottom:12px solid transparent;margin-left:6px}
+.vembed:hover .vplaybtn:after{border-left-color:#000}
 
 /* come-ready checklist */
 .prep{max-width:760px;margin:0 auto;background:linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.4));
@@ -95,51 +103,57 @@ figcaption span{color:var(--mute);font-size:14px}
     <div class="vgrid">
     <div class="vitem">
       <h3 class="vq">I have been burned by an agency before (part 1)</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/c147de96d8d942c0a52452920b4f06f2" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="I have been burned by an agency before (part 1)"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/c147de96d8d942c0a52452920b4f06f2"
+         target="_blank" rel="noopener"
+         data-loom="c147de96d8d942c0a52452920b4f06f2" aria-label="Play: I have been burned by an agency before (part 1)">
+        <img src="https://cdn.loom.com/sessions/thumbnails/c147de96d8d942c0a52452920b4f06f2-fb60c41c1b426ec7.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
     <div class="vitem">
       <h3 class="vq">I have been burned by an agency before (part 2)</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/95eaf5e742684a7d9267ff401f99e591" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="I have been burned by an agency before (part 2)"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/95eaf5e742684a7d9267ff401f99e591"
+         target="_blank" rel="noopener"
+         data-loom="95eaf5e742684a7d9267ff401f99e591" aria-label="Play: I have been burned by an agency before (part 2)">
+        <img src="https://cdn.loom.com/sessions/thumbnails/95eaf5e742684a7d9267ff401f99e591-7bc446c783b6cdd8.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
     <div class="vitem">
       <h3 class="vq">What is the Sniper Acquisition Method?</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/073a8997c0c94ba386fe15300c83d09d" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="What is the Sniper Acquisition Method?"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/073a8997c0c94ba386fe15300c83d09d"
+         target="_blank" rel="noopener"
+         data-loom="073a8997c0c94ba386fe15300c83d09d" aria-label="Play: What is the Sniper Acquisition Method?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/073a8997c0c94ba386fe15300c83d09d-0f21e844976e1c6e.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
     <div class="vitem">
       <h3 class="vq">How do you make sure the appointments are qualified?</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/5621049bcafa425c9ff4c8cc7824c49b" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="How do you make sure the appointments are qualified?"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/5621049bcafa425c9ff4c8cc7824c49b"
+         target="_blank" rel="noopener"
+         data-loom="5621049bcafa425c9ff4c8cc7824c49b" aria-label="Play: How do you make sure the appointments are qualified?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/5621049bcafa425c9ff4c8cc7824c49b-57a24089f793de59.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
     <div class="vitem">
       <h3 class="vq">Are the leads exclusive to me?</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/06916a2c8f88486990e56f1d587da659" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="Are the leads exclusive to me?"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/06916a2c8f88486990e56f1d587da659"
+         target="_blank" rel="noopener"
+         data-loom="06916a2c8f88486990e56f1d587da659" aria-label="Play: Are the leads exclusive to me?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/06916a2c8f88486990e56f1d587da659-1a1ad1fab2789af0.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
     <div class="vitem">
       <h3 class="vq">Why should I trust you?</h3>
-      <div class="vembed">
-        <iframe src="https://www.loom.com/embed/8fccfbf978804dc8a36821e9c5a8a759" frameborder="0"
-                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
-                title="Why should I trust you?"></iframe>
-      </div>
+      <a class="vembed" href="https://www.loom.com/share/8fccfbf978804dc8a36821e9c5a8a759"
+         target="_blank" rel="noopener"
+         data-loom="8fccfbf978804dc8a36821e9c5a8a759" aria-label="Play: Why should I trust you?">
+        <img src="https://cdn.loom.com/sessions/thumbnails/8fccfbf978804dc8a36821e9c5a8a759-4a9ac0f24bd82bfe.jpg" alt="" loading="lazy" decoding="async">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
     </div>
   </section>
@@ -179,3 +193,16 @@ figcaption span{color:var(--mute);font-size:14px}
   </div>
 
 </div>
+<script>
+document.querySelectorAll('a.vembed[data-loom]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    if (a.dataset.playing) return;
+    a.dataset.playing = '1';
+    a.innerHTML = '<iframe src="https://www.loom.com/embed/' + a.dataset.loom +
+      '?autoplay=1" frameborder="0" allow="autoplay; fullscreen"' +
+      ' allowfullscreen></iframe>';
+  });
+});
+</script>
