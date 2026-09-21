@@ -153,7 +153,7 @@ def render_videos():
       <h3 class="vq">{v['q']}</h3>
       <div class="vembed">
         <iframe src="https://www.loom.com/embed/{v['loom']}" frameborder="0"
-                webkitallowfullscreen mozallowfullscreen allowfullscreen
+                loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen
                 title="{v['q']}"></iframe>
       </div>
     </div>""")
