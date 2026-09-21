@@ -322,7 +322,6 @@ HTML = STYLE + f"""
         <iconify-icon icon="mdi:message-reply-text-outline"></iconify-icon>
         Text YES to confirm
       </a>
-      <div class="ctanum">{SMS_NUMBER}</div>
       <p class="ctanote">If something has come up and the time no longer works, text me and we will
       move it. I would rather move it than have you sat in a van missing it.</p>
     </div>
@@ -382,7 +381,7 @@ QUESTIONS_HTML = STYLE + f"""
       and I will answer it properly rather than off the cuff.</p>
       <a class="btn" href="sms:{SMS_TEL}">
         <iconify-icon icon="mdi:message-text-outline"></iconify-icon>
-        Text {SMS_NUMBER}
+        Text me
       </a>
     </div>
   </section>
