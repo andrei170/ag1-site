@@ -171,6 +171,8 @@ def render_videos():
         <img src="{thumb}" alt="" loading="lazy" decoding="async">
         <span class="vplaybtn" aria-hidden="true"></span>
       </a>
+      <a class="vlink" href="https://www.loom.com/share/{v['loom']}"
+         target="_blank" rel="noopener">Not playing? Watch it on Loom &rarr;</a>
     </div>""")
     return chr(10).join(out)
 
@@ -259,6 +261,9 @@ align-items:center;justify-content:center;transition:.18s}}
 .vplaybtn:after{{content:"";border-left:19px solid #fff;border-top:12px solid transparent;
 border-bottom:12px solid transparent;margin-left:6px}}
 .vembed:hover .vplaybtn:after{{border-left-color:#000}}
+.vlink{{font-family:var(--sans);font-size:13px;color:var(--mute);text-decoration:none;
+border-bottom:1px solid var(--line2);align-self:flex-start;padding-bottom:1px;transition:.15s}}
+.vlink:hover{{color:var(--gold-bright);border-color:var(--gold)}}
 
 /* come-ready checklist */
 .prep{{max-width:760px;margin:0 auto;background:linear-gradient(150deg,rgba(201,151,58,.1),rgba(0,0,0,.4));
