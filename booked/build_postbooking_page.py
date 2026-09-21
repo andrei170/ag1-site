@@ -374,6 +374,17 @@ QUESTIONS_HTML = STYLE + f"""
   </section>
 
   <section>
+    <h2>What we've done for <em>other businesses.</em></h2>
+    <p class="sub">Pulled straight from our clients' dashboards. This is the revenue our marketing
+    has actually driven.</p>
+    <div class="grid">
+{render_proof()}
+    </div>
+    <p class="ctanote" style="text-align:center;margin-top:18px">Every screenshot is pulled straight
+    from the platform. Results depend on your market, offer and spend.</p>
+  </section>
+
+  <section>
     <div class="cta">
       <div class="eye">// Still on your mind</div>
       <h2>Ask me the <em>rest.</em></h2>
