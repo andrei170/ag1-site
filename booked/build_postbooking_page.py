@@ -45,8 +45,9 @@ US_TEL = "+17863966358"
 #     retake as Pt.1 when Loom (and the original it replaces) both call it Pt.2, and it confirmed
 #     all 11 ids resolve publicly rather than being unlisted.
 # The five originals these replaced: 5621049b / 06916a2c / c147de96 / 95eaf5e7 / 073a8997.
-# "Why should I trust you?" is the ONE clip still on its original take - a retake was listed for
-# it with no URL, so there was nothing to swap in. Replace it when that clip exists.
+# "Why should I trust you?" caught up later the same day - Andrei supplied the retake
+# (37ba49e3, "Why Should I Trust You (Updated)", 157s against the original 8fccfbf9's 163s), so
+# ALL ELEVEN cards are now on the refilmed takes and none is left on an original.
 BREAKOUT_VIDEOS = [
     {
         "icon": "mdi:fire-alert",
@@ -87,8 +88,8 @@ BREAKOUT_VIDEOS = [
         "icon": "mdi:account-tie-outline",
         "q": "Why should I trust you?",
         "teaser": "You should not, not yet. Here are the things you can go and check instead.",
-        "loom": "8fccfbf978804dc8a36821e9c5a8a759",
-        "thumb": "8fccfbf978804dc8a36821e9c5a8a759-4a9ac0f24bd82bfe",
+        "loom": "37ba49e356df4237846fa6c02c3f2823",
+        "thumb": "37ba49e356df4237846fa6c02c3f2823-279e72241d8c08c2",
     },
     {
         "icon": "mdi:handshake-outline",
