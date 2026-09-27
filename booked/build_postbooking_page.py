@@ -35,41 +35,53 @@ US_TEL = "+17863966358"
 # ---------------------------------------------------------------- breakout videos
 # One card per objection, ranked as they appeared in the recorded sales calls.
 # Titled as the prospect would ask it. loom=None renders a "being filmed" placeholder.
+# 2026-09-27: refilmed with a proper microphone, and five more questions added, taking the set
+# from 6 cards to 11. Every "loom" and "thumb" below was resolved through Loom's own oEmbed
+# endpoint on that date, not typed from a share link:
+#   * the thumb hash is NOT derivable from the share id. Omit or guess it and the card renders
+#     black, which is the exact failure the page had on 2026-09-21.
+#   * oEmbed also returns the clip's OWN title, which is the only way to catch a mislabelled id
+#     before a prospect sees it. It caught two things: the source list labelled the "What we DO"
+#     retake as Pt.1 when Loom (and the original it replaces) both call it Pt.2, and it confirmed
+#     all 11 ids resolve publicly rather than being unlisted.
+# The five originals these replaced: 5621049b / 06916a2c / c147de96 / 95eaf5e7 / 073a8997.
+# "Why should I trust you?" is the ONE clip still on its original take - a retake was listed for
+# it with no URL, so there was nothing to swap in. Replace it when that clip exists.
 BREAKOUT_VIDEOS = [
     {
         "icon": "mdi:fire-alert",
         "q": "I have been burned by an agency before (part 1)",
         "teaser": "What we do not do, and why the lead-selling model produces the horror stories.",
-        "loom": "c147de96d8d942c0a52452920b4f06f2",
-        "thumb": "c147de96d8d942c0a52452920b4f06f2-fb60c41c1b426ec7",
+        "loom": "b7fd29dfdcaf4accbc7b53c75cc610a8",
+        "thumb": "b7fd29dfdcaf4accbc7b53c75cc610a8-f7d929ab36d26e4c",
     },
     {
         "icon": "mdi:shield-check-outline",
         "q": "I have been burned by an agency before (part 2)",
         "teaser": "What we actually do instead, and how you hold us to it.",
-        "loom": "95eaf5e742684a7d9267ff401f99e591",
-        "thumb": "95eaf5e742684a7d9267ff401f99e591-7bc446c783b6cdd8",
+        "loom": "d7d7583c39fc4a57b0d818750f56aca4",
+        "thumb": "d7d7583c39fc4a57b0d818750f56aca4-c1edec74636ae03e",
     },
     {
         "icon": "mdi:target",
         "q": "What is the Sniper Acquisition Method?",
         "teaser": "The system itself, in plain terms, and why it is built the way it is.",
-        "loom": "073a8997c0c94ba386fe15300c83d09d",
-        "thumb": "073a8997c0c94ba386fe15300c83d09d-0f21e844976e1c6e",
+        "loom": "c310ed1a74b1462aac1b58701c9fb156",
+        "thumb": "c310ed1a74b1462aac1b58701c9fb156-0d817e849b69bcf8",
     },
     {
         "icon": "mdi:filter-check-outline",
         "q": "How do you make sure the appointments are qualified?",
         "teaser": "Where the qualifying happens, and why it happens before your phone ever rings.",
-        "loom": "5621049bcafa425c9ff4c8cc7824c49b",
-        "thumb": "5621049bcafa425c9ff4c8cc7824c49b-57a24089f793de59",
+        "loom": "1d534f3ee36d4484ad9b802111d4e26c",
+        "thumb": "1d534f3ee36d4484ad9b802111d4e26c-02f3b0b5c5422862",
     },
     {
         "icon": "mdi:lock-outline",
         "q": "Are the leads exclusive to me?",
         "teaser": "Yours alone. How that differs from the directories, and what it means in writing.",
-        "loom": "06916a2c8f88486990e56f1d587da659",
-        "thumb": "06916a2c8f88486990e56f1d587da659-1a1ad1fab2789af0",
+        "loom": "8e73fe4fc8da474b91427dd8d681276e",
+        "thumb": "8e73fe4fc8da474b91427dd8d681276e-4bf4b7490c58f288",
     },
     {
         "icon": "mdi:account-tie-outline",
@@ -77,6 +89,41 @@ BREAKOUT_VIDEOS = [
         "teaser": "You should not, not yet. Here are the things you can go and check instead.",
         "loom": "8fccfbf978804dc8a36821e9c5a8a759",
         "thumb": "8fccfbf978804dc8a36821e9c5a8a759-4a9ac0f24bd82bfe",
+    },
+    {
+        "icon": "mdi:handshake-outline",
+        "q": "What is a growth partner, and how do you work with clients?",
+        "teaser": "What the arrangement actually is, and what working together looks like week to week.",
+        "loom": "946424424f5d4d798ddb11275f0a7395",
+        "thumb": "946424424f5d4d798ddb11275f0a7395-e531044351b3a25a",
+    },
+    {
+        "icon": "mdi:account-hard-hat-outline",
+        "q": "Why not just hire an in-house marketer?",
+        "teaser": "What that route really costs you, and where it tends to come unstuck.",
+        "loom": "3a9ab4bcca9648d285005acd68308701",
+        "thumb": "3a9ab4bcca9648d285005acd68308701-d869b4a2bd23cbc6",
+    },
+    {
+        "icon": "mdi:scale-balance",
+        "q": "Cost per lead, or cost per QUALIFIED lead?",
+        "teaser": "Why the cheaper number is usually the one that ends up costing you more.",
+        "loom": "4d543cb5b7134fa4acb624518dba8332",
+        "thumb": "4d543cb5b7134fa4acb624518dba8332-ca6e7f1a0af208e7",
+    },
+    {
+        "icon": "mdi:chart-line",
+        "q": "How will I know if my campaign has a return?",
+        "teaser": "What gets measured, and how you see it rather than take our word for it.",
+        "loom": "3b4fd95599e64d85b5e2e6481f16d7c9",
+        "thumb": "3b4fd95599e64d85b5e2e6481f16d7c9-42987b361c70a602",
+    },
+    {
+        "icon": "mdi:trending-up",
+        "q": "What results can you expect?",
+        "teaser": "What is realistic in your market, and what we will not promise you.",
+        "loom": "3b7e795913484c609a5e49ac4db00bdb",
+        "thumb": "3b7e795913484c609a5e49ac4db00bdb-fab0d65cbefcc51d",
     },
 ]
 
@@ -92,7 +139,7 @@ UNFILMED_TOPICS = [
     {"icon": "mdi:vector-difference", "q": "What makes you different from the last lot?"},
     {"icon": "mdi:file-document-outline", "q": "Do you lock me into a contract?"},
     {"icon": "mdi:exit-run", "q": "What happens if I stop working with you?"},
-    {"icon": "mdi:account-hard-hat-outline", "q": "Why not just hire someone in-house?"},
+    # "Why not just hire someone in-house?" moved up into BREAKOUT_VIDEOS on 2026-09-27 - filmed.
 ]
 
 # ---------------------------------------------------------------- come-ready checklist
@@ -514,7 +561,32 @@ WATCH_HTML = STYLE + f"""
 """
 
 
+def check_videos():
+    """Fail the build rather than ship a card that cannot render.
+
+    Each of these has already happened once. A thumb that does not belong to its own share id
+    renders a poster of the WRONG video, or a black box if the hash is stale - and the page looks
+    fine in the source, so it is only visible to the prospect. The same id twice means a question
+    was pasted over instead of added, which silently loses a clip.
+    """
+    ids = [v["loom"] for v in BREAKOUT_VIDEOS if v.get("loom")]
+    dupes = {i for i in ids if ids.count(i) > 1}
+    assert not dupes, "same Loom id on two cards: %s" % ", ".join(sorted(dupes))
+    for v in BREAKOUT_VIDEOS:
+        if not v.get("loom"):
+            continue
+        t = v.get("thumb") or ""
+        assert t, "%r has no thumb - the card would render black" % v["q"]
+        assert t.startswith(v["loom"] + "-"), (
+            "%r: thumb %r is not this video's (expected it to start with %s-). Re-resolve it "
+            "through https://www.loom.com/v1/oembed?url=https://www.loom.com/share/<id>"
+            % (v["q"], t, v["loom"]))
+    qs = [v["q"] for v in BREAKOUT_VIDEOS]
+    assert len(set(qs)) == len(qs), "two cards ask the same question"
+
+
 if __name__ == "__main__":
+    check_videos()
     assert "—" not in HTML and "–" not in HTML, "dash policy: hyphens only"
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(HTML)
