@@ -7,9 +7,16 @@ is the only copy that reaches the live URL. The separate ag1-postbooking repo is
 an older duplicate that serves at andrei170.github.io/ag1-postbooking/ and does
 not feed the live page. Do not edit that one expecting /booked/ to change.
 
-Images in assets/ are base64 inlined, so the output is a single ~3.4MB index.html
-with no external image requests. GitHub Pages takes a few minutes to flip the
-cache on a file that size, so curl before telling anyone it is live.
+Images in assets/ are referenced as ordinary files, NOT base64 inlined. That was
+changed on 2026-10-01: inlining produced a 3.4MB index.html that the browser had
+to parse in full before it could start anything else, including a Loom player the
+visitor had just clicked. The assets are already published alongside the page, so
+inlining was shipping every screenshot twice.
+
+Only ONE Loom player is ever alive. The hero video is a click-to-play facade like
+the FAQ cards, because two embeds initialising together starve each other - that
+is what made a clicked FAQ video sit black for ~30 seconds while the hero player
+held the pipe.
 
 Usage:
     python build_postbooking_page.py
@@ -191,10 +198,20 @@ DEMOS = [
 
 
 def data_uri(filename):
+    """Return a normal relative URL, NOT a base64 data URI.
+
+    It used to base64-inline every proof screenshot. The images are 2.5MB on
+    disk, base64 adds ~33%, and the result was a 3.4MB HTML file that the
+    browser had to parse in full before it could do anything else - including
+    start a Loom player the visitor had just clicked. The files are already
+    published at booked/assets/, so inlining was shipping them twice.
+
+    Serving them as files means the HTML is ~100KB, images stream in parallel,
+    and loading="lazy" on the <img> actually does something."""
     path = os.path.join(ASSETS, filename)
-    mime = "image/png" if filename.lower().endswith(".png") else "image/jpeg"
-    with open(path, "rb") as f:
-        return f"data:{mime};base64,{base64.b64encode(f.read()).decode('ascii')}"
+    if not os.path.exists(path):
+        raise SystemExit(f"missing asset: {path}")
+    return f"assets/{filename}"
 
 
 def render_videos():
@@ -228,17 +245,59 @@ def render_videos():
 
 
 PLAYER_JS = """<script>
-document.querySelectorAll('a.vembed[data-loom]').forEach(function(a){
-  a.addEventListener('click', function(e){
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-    e.preventDefault();
-    if (a.dataset.playing) return;
-    a.dataset.playing = '1';
-    a.innerHTML = '<iframe src="https://www.loom.com/embed/' + a.dataset.loom +
-      '?autoplay=1" frameborder="0" allow="autoplay; fullscreen"' +
-      ' allowfullscreen></iframe>';
+(function(){
+  // Open the connection to Loom the moment someone looks like they are about
+  // to click, rather than after they have. A cold click pays DNS + TCP + TLS
+  // + the player bundle before a frame appears; warming on hover or touch
+  // moves all of that into the time they spend reading the question.
+  var warmed = false;
+  function warm(){
+    if (warmed) return;
+    warmed = true;
+    ['https://www.loom.com','https://cdn.loom.com'].forEach(function(h){
+      var l = document.createElement('link');
+      l.rel = 'preconnect'; l.href = h; l.crossOrigin = '';
+      document.head.appendChild(l);
+    });
+  }
+
+  document.querySelectorAll('a.vembed[data-loom]').forEach(function(a){
+    a.addEventListener('mouseenter', warm, {once:true, passive:true});
+    a.addEventListener('touchstart', warm, {once:true, passive:true});
+    a.addEventListener('focus', warm, {once:true, passive:true});
+
+    a.addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      if (a.dataset.playing) return;
+      a.dataset.playing = '1';
+
+      // Only ever one player alive. Two Loom embeds initialising together
+      // starve each other - that is what made a clicked video sit black for
+      // half a minute while the hero player hogged the pipe.
+      document.querySelectorAll('a.vembed[data-playing] iframe').forEach(function(old){
+        var holder = old.closest('a.vembed');
+        if (holder === a) return;
+        delete holder.dataset.playing;
+        old.remove();
+        if (holder.dataset.poster) {
+          holder.innerHTML = holder.dataset.poster;
+        }
+      });
+
+      if (!a.dataset.poster) a.dataset.poster = a.innerHTML;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.loom.com/embed/' + a.dataset.loom +
+              '?autoplay=1&hideEmbedTopBar=true&hide_owner=true' +
+              '&hide_share=true&hide_title=true';
+      f.setAttribute('frameborder','0');
+      f.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+      f.setAttribute('allowfullscreen','');
+      a.innerHTML = '';
+      a.appendChild(f);
+    });
   });
-});
+})();
 </script>"""
 
 
@@ -266,7 +325,11 @@ def render_demos():
     </a>""" for f, href, tag, title, blurb, cta in DEMOS)
 
 
-STYLE = f"""<style>
+STYLE = f"""<link rel="preconnect" href="https://www.loom.com" crossorigin>
+<link rel="preconnect" href="https://cdn.loom.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.loom.com">
+<link rel="dns-prefetch" href="https://cdn.loom.com">
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap');
 :root{{--gold:#C9973A;--gold-bright:#E0BC63;--gold-deep:#B8922E;--bg:#050506;--panel:#0C0C11;
 --line:rgba(201,151,58,.2);--line2:rgba(201,151,58,.4);--text:#F5F2EB;--mute:#B7B2A7;--deep:#7E7A70;
@@ -381,10 +444,13 @@ HTML = STYLE + f"""
 
   <section>
     <div class="eye" style="text-align:center">// Watch this first</div>
-    <div style="max-width:820px;margin:0 auto;border-radius:18px;overflow:hidden;border:1px solid var(--line2)">
-      <div style="position:relative;padding-bottom:56.25%;height:0">
-        <iframe src="https://www.loom.com/embed/{LOOM_MAIN}?hideEmbedTopBar=true&amp;hide_owner=true&amp;hide_share=true&amp;hide_title=true" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
-      </div>
+    <div style="max-width:820px;margin:0 auto">
+      <a class="vembed" href="https://www.loom.com/share/{LOOM_MAIN}"
+         target="_blank" rel="noopener"
+         data-loom="{LOOM_MAIN}" aria-label="Play the introduction"
+         style="border-radius:18px;border-color:var(--line2)">
+        <span class="vplaybtn" aria-hidden="true"></span>
+      </a>
     </div>
   </section>
 
